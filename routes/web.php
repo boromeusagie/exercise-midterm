@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/blog', 301);
+
+Route::get('/blog/{category?}', [BlogController::class, 'index'])->name('index');
+
+Route::get('/post/{postId}', [BlogController::class, 'show'])->name('show');
